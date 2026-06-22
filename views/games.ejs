@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Games</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+
+<h1>Games</h1>
+
+<ul>
+  <% games.forEach(game => { %>
+    <li>
+      <strong><%= game.title %></strong>
+      -
+      <%= game.genre %>
+      -
+      <%= game.platform %>
+    </li>
+  <% }) %>
+</ul>
+
+<h2>Add Game</h2>
+
+<form action="/games" method="POST">
+
+  <input
+    type="text"
+    name="title"
+    placeholder="Game Title"
+  >
+
+  <input
+    type="text"
+    name="genre"
+    placeholder="Genre"
+  >
+
+  <input
+    type="text"
+    name="platform"
+    placeholder="Platform"
+  >
+
+  <button type="submit">
+    Add Game
+  </button>
+
+</form>
+
+</body>
+</html>

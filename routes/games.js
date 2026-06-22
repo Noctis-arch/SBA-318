@@ -5,7 +5,7 @@ const games = require("../data/games");
 const gameValidator = require("../middleware/gameValidator");
 
 
-// GET all games
+// GET all games + query filtering
 
 router.get("/", (req, res) => {
   let filteredGames = games;
@@ -42,6 +42,7 @@ router.get("/:id", (req, res) => {
 // POST game
 
 router.post("/", gameValidator, (req, res) => {
+
   const newGame = {
     id: games.length + 1,
     title: req.body.title,
@@ -49,18 +50,23 @@ router.post("/", gameValidator, (req, res) => {
     platform: req.body.platform
   };
 
+
   games.push(newGame);
 
-  res.status(201).json(newGame);
+
+  res.redirect("/games-view");
+
 });
 
 
-// PATCH game
+// PUT game (replace all data)
 
-router.patch("/:id", (req, res) => {
+router.put("/:id", (req, res) => {
+
   const game = games.find(
     game => game.id === Number(req.params.id)
   );
+
 
   if (!game) {
     return res.status(404).json({
@@ -68,20 +74,51 @@ router.patch("/:id", (req, res) => {
     });
   }
 
+
+  game.title = req.body.title;
+  game.genre = req.body.genre;
+  game.platform = req.body.platform;
+
+
+  res.json(game);
+
+});
+
+
+// PATCH game (update specific fields)
+
+router.patch("/:id", (req, res) => {
+
+  const game = games.find(
+    game => game.id === Number(req.params.id)
+  );
+
+
+  if (!game) {
+    return res.status(404).json({
+      error: "Game not found"
+    });
+  }
+
+
   game.title = req.body.title || game.title;
   game.genre = req.body.genre || game.genre;
   game.platform = req.body.platform || game.platform;
 
+
   res.json(game);
+
 });
 
 
 // DELETE game
 
 router.delete("/:id", (req, res) => {
+
   const index = games.findIndex(
     game => game.id === Number(req.params.id)
   );
+
 
   if (index === -1) {
     return res.status(404).json({
@@ -89,11 +126,15 @@ router.delete("/:id", (req, res) => {
     });
   }
 
+
   games.splice(index, 1);
+
 
   res.json({
     message: "Game deleted"
   });
+
 });
+
 
 module.exports = router;

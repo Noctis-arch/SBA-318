@@ -1,0 +1,57 @@
+# Game Collection Manager - SBA318
+
+A small Express.js application that allows users to manage a collection of games.
+
+## Features
+- Express server
+- RESTful API
+- CRUD operations for games
+- EJS rendered views
+- Custom middleware
+- Error handling middleware
+- Static CSS styling
+## Technologies Used
+- Node.js
+- Express.js
+- EJS
+- JavaScript
+- CSS
+## Project Structure
+- routes - API routes
+- views - EJS pages
+- middleware - custom middleware
+- data - application data
+- public - CSS files
+## Running the Project
+Install dependencies:
+
+npm install
+
+Start the server:
+
+npm start
+
+Open in browser:
+
+http://localhost:3000
+
+## API Routes
+GET /games
+
+GET /games/:id
+
+POST /games
+
+PUT /games/:id
+
+PATCH /games/:id
+
+DELETE /games/:id
+
+GET /users
+
+GET /reviews
+
+## Purpose
+
+This project was created to practice building a REST API using Express and connecting it with rendered views and forms.
